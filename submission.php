@@ -31,6 +31,34 @@
 <body>
 <h1 align="center"> Congratulations! Your work has been submitted </h1>
 
+<p>
+
+<?php
+  #Set up database
+  class MyDB extends SQLite3
+  {
+    function __construct()
+    {
+      $this->open($_SERVER['DOCUMENT_ROOT'].'/local.db');
+    }
+  }
+  $db = new MyDB();
+  if(!$db) { echo $db->lastErrorMsg(); }
+  $db->query("CREATE TABLE IF NOT EXISTS DATA565 (
+    id integer PRIMARY KEY,
+    input_text varchar,
+    input_time varchar
+  )");
+  $ret = $db->query("SELECT max(id) FROM DATA565");
+  $maxid = $ret->fetchArray()[0]+1;
+  // echo $maxid;
+  $thedate = date('Y-m-d G:i:s');
+  echo $thedate;
+  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$_POST["name"]."','".$thedate."')");
+?>
+
+</p>
+
 </body>
 
 </html>

@@ -30,6 +30,32 @@
     <![endif]-->
 </head>
 
+<script>
+    function post(path, params, method) {
+        method = method || "post"; // Set method to post by default if not specified.
+
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+             }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+
 <body>
 
 
@@ -37,7 +63,7 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-       
+
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <h3 align="center">Favourite Users </h3>
@@ -63,7 +89,7 @@
                     <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #761c19"></i><span class="tooltiptext"> Sarah (Not started)</span></a>
                 </li>
 
-                
+
                 <hr style="background-color: white">
 
                 <h3 align="center">Other Users </h3>
@@ -96,13 +122,13 @@
                     <div class="col-lg-12">
                         <h1 align="center"><i class="fa fa-circle" style="color: #2b542c"></i><u>Assignment 1</u></h1>
                         <p align="center">Time active: <time>00:00:00</time></p>
-                        <p align="center"> Total Words: <span id="display_count">0</span> 
+                        <p align="center"> Total Words: <span id="display_count">0</span>
                         <br><br>
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">See users</a>
                         <br><br>
 
                        <textarea id="word_count" placeholder="Enter your answer here" style="width:100%; height:350px;"></textarea>
-                       <a type="submit" class="btn btn-default" onclick="javascript:eraseText();">Submit</a>
+                       <a type="submit" class="btn btn-default" onclick="javascript:submitText();">Submit</a>
                     </div>
                 </div>
             </div>
@@ -163,7 +189,7 @@
                         <p >Number of Words: 200</p>
                         <p>Time Spent: 4 hours</p>
                         <p>Progress: 96%</p>
-                        
+
                     </div>
                 </div>
 
@@ -183,7 +209,7 @@
                         <p >Number of Words: 0</p>
                         <p>Time Spent: 0</p>
                         <p>Progress: 0%</p>
-                        
+
                     </div>
                 </div>
 
@@ -203,7 +229,7 @@
                         <p >Number of Words: 50</p>
                         <p>Time Spent: 30 mins</p>
                         <p>Progress: 6%</p>
-                        
+
                     </div>
                 </div>
 
@@ -223,7 +249,7 @@
                         <p >Number of Words: 0</p>
                         <p>Time Spent: 0</p>
                         <p>Progress: 0%</p>
-                        
+
                     </div>
                 </div>
 
@@ -245,7 +271,7 @@
                         <p>Progress: 35%</p>
                         <button data-dismiss="modal"> Add as Favourite</button>
 
-                        
+
                     </div>
                 </div>
 
@@ -266,7 +292,7 @@
                         <p>Time Spent: 10 mins</p>
                         <p>Progress: 2%</p>
                         <button data-dismiss="modal"> Add as Favourite</button>
-                        
+
                     </div>
                 </div>
 
@@ -287,7 +313,7 @@
                         <p>Time Spent: 0</p>
                         <p>Progress: 0%</p>
                         <button data-dismiss="modal"> Add as Favourite</button>
-                        
+
                     </div>
                 </div>
 
@@ -308,7 +334,7 @@
                         <p>Time Spent: 5 hours</p>
                         <p>Progress: 99%</p>
                         <button data-dismiss="modal"> Add as Favourite</button>
-                        
+
                     </div>
                 </div>
 
@@ -336,15 +362,16 @@
   $("#word_count").on('keyup', function() {
     var words = this.value.match(/\S+/g).length;
 
-    
+
       $('#display_count').text(words);
-      
+
     });
   });
 
-    function eraseText() {
-        document.getElementById("word_count").value = "";
-        window.location.href="submission.html"
+    function submitText() {
+        post("submission.php",{name: document.getElementById("word_count").value});
+        // document.getElementById("word_count").value = "";
+        // window.location.href="submission.html"
     }
 
     </script>
