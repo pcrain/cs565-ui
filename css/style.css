@@ -1,0 +1,7 @@
+ .modal-body{
+     text-align: center;
+     position: relative;
+     overflow-y: auto;
+     max-height: 400px;
+     padding: 15px;
+ }
