@@ -376,6 +376,8 @@
 
     </script>
     <script src="timer.js"></script>
+    <script src="chance.min.js"></script>
+    <script src="virtual_people.js"></script>
 </body>
 
 </html>

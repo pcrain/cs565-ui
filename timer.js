@@ -6,10 +6,12 @@ var time = document.getElementsByTagName('time')[0],
     stop = document.getElementById('stop'),
     clear = document.getElementById('clear'),
     seconds = 0, minutes = 0, hours = 0,
+    totalSeconds = 0,
     t;
 
 function add() {
     seconds++;
+    totalSeconds++;
     if (seconds >= 60) {
         seconds = 0;
         minutes++;
@@ -30,15 +32,15 @@ timer();
 
 
 /* Start button */
-start.onclick = timer;
+//start.onclick = timer;
 
 /* Stop button */
-stop.onclick = function() {
-    clearTimeout(t);
-}
+//stop.onclick = function() {
+//    clearTimeout(t);
+//}
 
 /* Clear button */
-clear.onclick = function() {
-    time.textContent = "00:00:00";
-    seconds = 0; minutes = 0; hours = 0;
-}
+//clear.onclick = function() {
+//    time.textContent = "00:00:00";
+//    seconds = 0; minutes = 0; hours = 0;
+//}
