@@ -3,13 +3,13 @@ var color  = ["#000000","#000000","#107896","#888888"];
 var status = ["not started","inactive","active","completed"];
 
 if (cond == 1) {
-    var adjCompletionTime = 15; //adjusted for slow users
-    var avgCompletionTime = 15; //minutes
+    var adjCompletionTime = 3; //adjusted for slow users
+    var avgCompletionTime = 3; //minutes
     var nSims             = 20;
 }
 if (cond == 2) {
-    var adjCompletionTime = 15; //adjusted for slow users
-    var avgCompletionTime = 1; //minutes
+    var adjCompletionTime = 3; //adjusted for slow users
+    var avgCompletionTime = 15; //minutes
     var nSims             = 8;
 }
 
@@ -19,11 +19,11 @@ if (cond == 2) {
 var chance = new Chance();
 
 var nMaxWords         = 300;
-var timeInterval      = 10; //seconds
+var timeInterval      = 5; //seconds
 
 var dt = new Date(); var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
 // alert(secs);
-var startIndex = Math.floor( ((nSims*secs)/(60*adjCompletionTime)) % unames.length);
+var startIndex = Math.floor( ((nSims*secs)/(60*avgCompletionTime)) % unames.length);
 // alert(unames[startIndex]);
 
 var group1a = {      //arrived early, average focus, persistence, and speed
@@ -202,6 +202,9 @@ Sim.prototype.tick = function(){
                 else{
                     this.progress += 0;
                 }
+            } else {
+                this.progress = 0;   //If we haven't started yet, we haven't made progress
+                this.activeTime = 0;
             }
 
             this.state = this.activityHMM.state + 1;
@@ -259,7 +262,7 @@ class Simulator
         this.nWords   = [];
         this.simState = [];
 
-        var avgProgressPerTick = 100*timeInterval/(avgCompletionTime*60);
+        var avgProgressPerTick = 100*timeInterval/(adjCompletionTime*60);
 
         // var simNames = chance.unique(chance.first, this.nSims);
         var groupNum = Array.from(Array(this.nSims), (v,ind) => ind).map(
@@ -274,9 +277,14 @@ class Simulator
             );
 
             this.nWords.push(Math.floor(chance.normal({mean: nMaxWords, dev: 1/5*nMaxWords})) );
-            this.theSims[i].progress = this.nWords[i]/nMaxWords;
+            this.theSims[i].progress = 100*chance.normal({mean: 0.30, dev: 0.10});
             this.theSims[i].activeTime =
-                Math.floor(chance.normal({mean: this.theSims[i].progress, dev: 0.2}) * avgCompletionTime * 60 / timeInterval);
+              Math.floor(
+                Math.max(
+                    (this.theSims[i].progress*(adjCompletionTime/100))/timeInterval,
+                    chance.normal({mean: this.theSims[i].progress/100, dev: 0.1})
+                ) * 60
+              );
         }
     }
 
@@ -306,11 +314,14 @@ class Simulator
                 status   : status[sim.state],
                 color    : color[sim.state],
                 name     : sim.name,
-                active   : Math.floor(sim.activeTime *timeInterval /60)
+                active   : Math.floor(sim.activeTime *timeInterval)
             });
         }
 
         this.simState = output;
+        if ($("body").hasClass("modal-open")) {
+            return;
+        }
         genUsers(this.simState);
 
 //        var disp = output.map(s => s.nWords);
@@ -320,9 +331,6 @@ class Simulator
 
 
 function tick(simsim){
-    if ($("body").hasClass("modal-open")) {
-        return;
-    }
     simsim.tick()
 }
 
