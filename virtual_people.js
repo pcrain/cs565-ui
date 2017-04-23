@@ -1,15 +1,21 @@
 var color  = ["#000000","#880000","#008800","#888888"];
 var status = ["not started","inactive","active","completed"];
 
+if (cond == 1) {
+    var avgCompletionTime = 15; //minutes
+}
+if (cond == 2) {
+    var avgCompletionTime = 1; //minutes
+}
+
 // var namechance = new Chance("nameseed");
 // var unames = namechance.unique(namechance.first, 300);
 // alert(unames);
 var chance = new Chance();
 
 var nSims             = 15;
-var avgCompletionTime = 0.15; //minutes
 var nMaxWords         = 300;
-var timeInterval      = 1; //seconds
+var timeInterval      = 15; //seconds
 
 var dt = new Date(); var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
 // alert(secs);
@@ -65,8 +71,12 @@ var group1b = {
     speedMean : 0.00
 }
 
-// var groups  = [group1,group2,group3,group4,group5,group6]
-var groups  = [group1b,group1b,group1b,group1b,group1b,group1b]
+if (cond == 1) {
+    var groups  = [group1a,group2a,group3a,group4a,group5a,group6a]
+}
+if (cond == 2) {
+    var groups  = [group1b,group1b,group1b,group1b,group1b,group1b]
+}
 var weights = [1,1,1,1,1,1];
 var sumW    = weights.reduce((a,b) => a+b);
 weights     = weights.map(x => x/sumW);

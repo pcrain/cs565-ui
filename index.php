@@ -30,6 +30,19 @@
     <![endif]-->
 </head>
 
+<?php
+    $good = false;
+    if ($_GET['c'] == "29472303298573462465") {
+        $good = true;
+    }
+    if ($_GET['c'] == "20453436234763468785") {
+        $good = true;
+    }
+    if (! $good) {
+        exit("You are not authorized to access this page at this time.");
+    }
+?>
+
 <script>
     function post(path, params, method) {
         method = method || "post"; // Set method to post by default if not specified.
@@ -191,6 +204,37 @@
 
     </script>
 
+    <script type="text/javascript">
+
+        var $_GET = {};
+        if(document.location.toString().indexOf('?') !== -1) {
+            var query = document.location
+                           .toString()
+                           // get the query string
+                           .replace(/^.*?\?/, '')
+                           // and remove any existing hash string (thanks, @vrijdenker)
+                           .replace(/#.*$/, '')
+                           .split('&');
+
+            for(var i=0, l=query.length; i<l; i++) {
+               var aux = decodeURIComponent(query[i]).split('=');
+               $_GET[aux[0]] = aux[1];
+            }
+        }
+
+        //Cond 1 = 2947265
+        //Cond 2 = 2045385
+
+        var cond = 0;
+        if ($_GET['c'] == "29472303298573462465") {
+            cond = 1;
+        }
+        if ($_GET['c'] == "20453436234763468785") {
+            cond = 2;
+        }
+        // alert(cond);
+    </script>
+
     <script src="timer.js"></script>
     <script src="chance.min.js"></script>
     <script src="names.js"></script>
@@ -198,7 +242,7 @@
 
     <script type="text/javascript">
         var number = (function ask() {
-          var n = prompt("Please enter your first name:");
+          var n = prompt("Please enter a username:");
           return ((n == null) || (n.length < 2)) ? ask() : n;
         }());
     </script>
