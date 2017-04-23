@@ -29,9 +29,12 @@
 </head>
 
 <body>
-<h1 align="center"> Thank you! Your work has been submitted.</h1>
 
 <?php
+  if (! isset($_POST["textcontent"])) exit;
+  if (! isset($_POST["username"])) exit;
+  $words = SQLite3::escapeString($_POST["textcontent"]);
+  $uname = SQLite3::escapeString($_POST["username"]);
   #Set up database
   class MyDB extends SQLite3
   {
@@ -54,10 +57,11 @@
   // echo $maxid;
   $thedate = date('Y-m-d G:i:s');
   // echo $thedate;
-  $words = SQLite3::escapeString($_POST["textcontent"]);
-  $uname = SQLite3::escapeString($_POST["username"]);
   $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$uname."','".$words."','".$_POST['timespent']."','".$thedate."')");
 ?>
+
+<h1 align="center"> Thank you! Your work has been submitted.</h1>
+
 
 <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1"> <h1 align="center">Please click here to take a short survey and give us feedback on this task (opens in a new tab).</h1></a>
 
