@@ -1,4 +1,4 @@
-var color  = ["#000000","#FF0000","#00FF00","#FFFFFF"];
+var color  = ["#000000","#880000","#008800","#888888"];
 var status = ["not started","inactive","active","completed"];
 
 var namechance = new Chance("nameseed");
@@ -7,9 +7,9 @@ var unames = namechance.unique(namechance.first, 300);
 var chance = new Chance();
 
 var nSims             = 15;
-var avgCompletionTime = 0.15; //minutes
+var avgCompletionTime = 15; //minutes
 var nMaxWords         = 300;
-var timeInterval      = 1; //seconds
+var timeInterval      = 10; //seconds
 
 var dt = new Date(); var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
 // alert(secs);

@@ -56,7 +56,7 @@
     }
 </script>
 
-<body>
+<body onload="username()">
 
 
     <div id="wrapper" class="toggled">
@@ -125,8 +125,8 @@
                         <p align="center">Time active: <time>00:00:00</time></p>
                         <p align="center"> Total Words: <span id="display_count">0</span>
                         <br><br>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">See users</a>
-                        <br><br>
+                        <!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">See users</a> -->
+                        <!-- <br><br> -->
 
                        <textarea id="word_count" placeholder="Enter your answer here" style="width:100%; height:350px;"></textarea>
                        <a type="submit" class="btn btn-default" onclick="javascript:submitText();">Submit</a>
@@ -407,7 +407,9 @@
             var ss = '<li data-toggle="modal" data-target="#myModal'+(i+1)+'">';
             ss += '<a href="#" style="font-size: large";>'
             ss += '<i class="fa fa-circle" style="color:' + user["color"] + '"></i> ';
-            ss += user["name"] + " (" + status +")</a></li>";
+            ss += "<span class='sidebarUsename'>" + user["name"] + "</span>";
+            // ss += " (" + status +")"
+            ss += "</a></li>";
             // alert(ss);
             $(".sidebar-nav").append(ss);
 
