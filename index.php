@@ -441,7 +441,10 @@
     <script src="virtual_people.js"></script>
 
     <script type="text/javascript">
-        window.prompt("Please enter your first name:");
+        var number = (function ask() {
+          var n = prompt("Please enter your first name:");
+          return ((n == null) || (n.length < 2)) ? ask() : n;
+        }());
     </script>
 </body>
 
