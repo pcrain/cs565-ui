@@ -254,7 +254,7 @@ class Simulator
         for (var i = 0; i < this.nSims; i++){
             var ind = groupNum[i];
             this.theSims.push(
-                new Sim(unames[startIndex+i], groups[ind].latencyMean, groups[ind].focusMean, groups[ind].persistenceMean, groups[ind].speedMean, avgProgressPerTick)
+                new Sim(unames[(startIndex+i)%unames.length], groups[ind].latencyMean, groups[ind].focusMean, groups[ind].persistenceMean, groups[ind].speedMean, avgProgressPerTick)
             );
 
             this.nWords.push(Math.floor(chance.normal({mean: nMaxWords, dev: 1/5*nMaxWords})) );
