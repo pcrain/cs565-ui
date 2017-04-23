@@ -80,7 +80,7 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <span class="fa fa-circle" style="color: #107896"><span class="legendText"> Typing   </span></span>
-                    <!-- <span class="fa fa-circle" style="color: #C02F1D"><span class="legendText"> Inactive</span></span> -->
+                    <span class="fa fa-circle" style="color: #444444"><span class="legendText"> Inactive</span></span>
                     <!-- <i class="fa fa-circle" style="color: #880000"></i><h3 align="center">Inactive</h3> -->
                 </li>
             </ul>

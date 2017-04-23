@@ -1,4 +1,4 @@
-var color  = ["#000000","#000000","#107896","#888888"];
+var color  = ["#000000","#444444","#107896","#888888"];
 // var color  = ["#000000","#C02F1D","#107896","#888888"];
 var status = ["not started","inactive","active","completed"];
 
@@ -70,7 +70,7 @@ var group6a = {      //arrived later, average focus and lower persistence, but f
 
 var group1b = {
     latencyMean : 9/10,
-    focusMean   : 1/10,
+    focusMean   : 1/20,
     persistenceMean : 1/10,
     speedMean : 0.00
 }
