@@ -1,4 +1,5 @@
-var color  = ["#000000","#C02F1D","#107896","#888888"];
+var color  = ["#000000","#000000","#107896","#888888"];
+// var color  = ["#000000","#C02F1D","#107896","#888888"];
 var status = ["not started","inactive","active","completed"];
 
 if (cond == 1) {

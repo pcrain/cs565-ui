@@ -80,7 +80,7 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <span class="fa fa-circle" style="color: #107896"><span class="legendText"> Typing   </span></span>
-                    <span class="fa fa-circle" style="color: #C02F1D"><span class="legendText"> Inactive</span></span>
+                    <!-- <span class="fa fa-circle" style="color: #C02F1D"><span class="legendText"> Inactive</span></span> -->
                     <!-- <i class="fa fa-circle" style="color: #880000"></i><h3 align="center">Inactive</h3> -->
                 </li>
             </ul>
@@ -199,7 +199,7 @@
             ss += '<div class="modal-body">';
             ss += '<p >Number of Words: '+user["nWords"]+'</p>';
              ss += '<p>Time Spent: '+user["active"]+' mins</p>'; //Hardcoded for now
-            ss += '<p>Progress: '+Math.min(100,Math.floor(user["progress"]))+'%</p>';
+            // ss += '<p>Progress: '+Math.min(100,Math.floor(user["progress"]))+'%</p>';
             ss += '</div></div></div></div>';
 
             $("#wrapper").append(ss);
