@@ -31,21 +31,20 @@
 <body>
 <h1 align="center"> Thank you! Your work has been submitted.</h1>
 
-<h1 id="code-area" align="center"> Please copy the following code to MTurk: placeholder</h1>
-
 <?php
   #Set up database
   class MyDB extends SQLite3
   {
     function __construct()
     {
-      $this->open($_SERVER['DOCUMENT_ROOT'].'/local.db');
+      $this->open($_SERVER['DOCUMENT_ROOT'].'/thesd/local.db');
     }
   }
   $db = new MyDB();
   if(!$db) { echo $db->lastErrorMsg(); }
   $db->query("CREATE TABLE IF NOT EXISTS DATA565 (
     id integer PRIMARY KEY,
+    input_name varchar,
     input_text varchar,
     input_spent varchar,
     input_time varchar
@@ -56,17 +55,20 @@
   $thedate = date('Y-m-d G:i:s');
   // echo $thedate;
   $words = SQLite3::escapeString($_POST["textcontent"]);
-  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$words."','".$_POST['timespent']."','".$thedate."')");
+  $uname = SQLite3::escapeString($_POST["username"]);
+  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$uname."','".$words."','".$_POST['timespent']."','".$thedate."')");
 ?>
 
-<h1 align="center">Please visit this short survey: <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1"> https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1 </a></h1>
+<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1"> <h1 align="center">Please click here to take a short survey and give us feedback on this task (opens in a new tab).</h1></a>
+
+<h1 id="code-area" align="center"> Please copy the following Task Code to MTurk  and the survey above: placeholder</h1>
 
 <script src="js/jquery.js"></script>
 <script src="chance.min.js"></script>
 <script src="codegen.js"></script>
 <script type="text/javascript">
   var code = codeGen();
-  $("#code-area").html("Please copy the following code to MTurk: "+code);
+  $("#code-area").html("Please copy the following code to MTurk and the survey above: <div class='thecode'>"+code+"</div>");
 </script>
 
 </body>

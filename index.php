@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Write a Review</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -44,6 +44,7 @@
 ?>
 
 <script>
+    var globalname = "";
     function post(path, params, method) {
         method = method || "post"; // Set method to post by default if not specified.
 
@@ -59,7 +60,6 @@
                 hiddenField.setAttribute("type", "hidden");
                 hiddenField.setAttribute("name", key);
                 hiddenField.setAttribute("value", params[key]);
-
                 form.appendChild(hiddenField);
              }
         }
@@ -79,8 +79,8 @@
 
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <span class="fa fa-circle" style="color: #008800"><span class="legendText"> Typing   </span></span>
-                    <span class="fa fa-circle" style="color: #880000"><span class="legendText"> Inactive</span></span>
+                    <span class="fa fa-circle" style="color: #107896"><span class="legendText"> Typing   </span></span>
+                    <span class="fa fa-circle" style="color: #C02F1D"><span class="legendText"> Inactive</span></span>
                     <!-- <i class="fa fa-circle" style="color: #880000"></i><h3 align="center">Inactive</h3> -->
                 </li>
             </ul>
@@ -92,8 +92,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <b><p align="center"><u>Write a review of your favorite movie</u></p></b>
-                        <p align="center">Minimum 150 words. Please use our interface for the writing task (we will know if you don’t). Complete a short survey after the task.</p>
+                        <b><h1 align="center">Write a review of your favorite movie</h1></b>
+                        <p align="center">Minimum 150 words. Please use our interface for the writing task (we will know if you don’t), and complete a short survey afterwards. Paste the task code you receive after completing the writing assignment to both the survey and to the HIT on Mechanical Turk.</p>
                         <!-- <h1 align="center"><i class="fa fa-circle" style="color: #2b542c"></i><u>Assignment 1</u></h1> -->
                         <p align="center">Time active: <time>00:00:00</time></p>
                         <p align="center"> Total Words: <span id="display_count">0</span>
@@ -147,11 +147,13 @@
         }
 
         var utimespent = document.getElementsByTagName('time')[0].textContent;
+        var uname =
         // alert(mysql_real_escape_string(words));
         post("submission.php",
             {
                 textcontent: words,
-                timespent: utimespent
+                timespent: utimespent,
+                username: globalname
             }
         );
         // document.getElementById("word_count").value = "";
@@ -246,7 +248,7 @@
     <script src="virtual_people.js"></script>
 
     <script type="text/javascript">
-        var number = (function ask() {
+        var globalname = (function ask() {
           var n = prompt("Please enter a username:");
           return ((n == null) || (n.length < 2)) ? ask() : n;
         }());

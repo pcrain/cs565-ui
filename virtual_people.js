@@ -1,11 +1,15 @@
-var color  = ["#000000","#880000","#008800","#888888"];
+var color  = ["#000000","#C02F1D","#107896","#888888"];
 var status = ["not started","inactive","active","completed"];
 
 if (cond == 1) {
+    var adjCompletionTime = 15; //adjusted for slow users
     var avgCompletionTime = 15; //minutes
+    var nSims             = 20;
 }
 if (cond == 2) {
+    var adjCompletionTime = 15; //adjusted for slow users
     var avgCompletionTime = 1; //minutes
+    var nSims             = 8;
 }
 
 // var namechance = new Chance("nameseed");
@@ -13,13 +17,12 @@ if (cond == 2) {
 // alert(unames);
 var chance = new Chance();
 
-var nSims             = 15;
 var nMaxWords         = 300;
-var timeInterval      = 15; //seconds
+var timeInterval      = 10; //seconds
 
 var dt = new Date(); var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
 // alert(secs);
-var startIndex = Math.floor( ((nSims*secs)/(60*avgCompletionTime)) % unames.length);
+var startIndex = Math.floor( ((nSims*secs)/(60*adjCompletionTime)) % unames.length);
 // alert(unames[startIndex]);
 
 var group1a = {      //arrived early, average focus, persistence, and speed
