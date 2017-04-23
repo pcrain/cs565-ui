@@ -33,6 +33,7 @@
 <?php
   if (! isset($_POST["textcontent"])) exit;
   if (! isset($_POST["username"])) exit;
+  if (! isset($_POST["code"])) exit;
   $words = SQLite3::escapeString($_POST["textcontent"]);
   $uname = SQLite3::escapeString($_POST["username"]);
   #Set up database
@@ -50,14 +51,15 @@
     input_name varchar,
     input_text varchar,
     input_spent varchar,
-    input_time varchar
+    input_time varchar,
+    input_code varchar
   )");
   $ret = $db->query("SELECT max(id) FROM DATA565");
   $maxid = $ret->fetchArray()[0]+1;
   // echo $maxid;
   $thedate = date('Y-m-d G:i:s');
   // echo $thedate;
-  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$uname."','".$words."','".$_POST['timespent']."','".$thedate."')");
+  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$uname."','".$words."','".$_POST['timespent']."','".$thedate."','".$_POST['code']."')");
 ?>
 
 <h1 align="center"> Thank you! Your work has been submitted.</h1>
@@ -65,15 +67,10 @@
 
 <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1"> <h1 align="center">Please click here to take a short survey and give us feedback on this task (opens in a new tab).</h1></a>
 
-<h1 id="code-area" align="center"> Please copy the following Task Code to MTurk  and the survey above: placeholder</h1>
-
-<script src="js/jquery.js"></script>
-<script src="chance.min.js"></script>
-<script src="codegen.js"></script>
-<script type="text/javascript">
-  var code = codeGen();
-  $("#code-area").html("Please copy the following code to MTurk and the survey above: <div class='thecode'>"+code+"</div>");
-</script>
+<h1 id="code-area" align="center">
+  Please copy the following Task Code to MTurk and the survey above:
+  <?php echo $_POST["code"]; ?>
+</h1>
 
 </body>
 

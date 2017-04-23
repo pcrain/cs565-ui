@@ -28,6 +28,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src="js/jquery.js"></script>
+    <script src="chance.min.js"></script>
+    <script src="codegen.js"></script>
+
 </head>
 
 <?php
@@ -44,6 +49,33 @@
 ?>
 
 <script>
+    var $_GET = {};
+    if(document.location.toString().indexOf('?') !== -1) {
+        var query = document.location
+                       .toString()
+                       // get the query string
+                       .replace(/^.*?\?/, '')
+                       // and remove any existing hash string (thanks, @vrijdenker)
+                       .replace(/#.*$/, '')
+                       .split('&');
+
+        for(var i=0, l=query.length; i<l; i++) {
+           var aux = decodeURIComponent(query[i]).split('=');
+           $_GET[aux[0]] = aux[1];
+        }
+    }
+
+    //Cond 1 = 2947265
+    //Cond 2 = 2045385
+
+    var cond = 0;
+    if ($_GET['c'] == "29472303298573462465") {
+        cond = 1;
+    }
+    if ($_GET['c'] == "20453436234763468785") {
+        cond = 2;
+    }
+
     var globalname = "";
     function post(path, params, method) {
         method = method || "post"; // Set method to post by default if not specified.
@@ -93,7 +125,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <b><h1 align="center">Write a review of your favorite movie</h1></b>
-                        <p align="center">Minimum 150 words. Please use our interface for the writing task (we will know if you don’t), and complete a short survey afterwards. Paste the task code you receive after completing the writing assignment to both the survey and to the HIT on Mechanical Turk.</p>
+                        <p align="center">Minimum 150 words. Please use our interface for the writing task (we will know if you don’t), and complete a short survey afterwards. Paste the task code you receive after completing the writing assignment both to the survey and to the HIT on Mechanical Turk.</p>
                         <!-- <h1 align="center"><i class="fa fa-circle" style="color: #2b542c"></i><u>Assignment 1</u></h1> -->
                         <p align="center">Time active: <time>00:00:00</time></p>
                         <p align="center"> Total Words: <span id="display_count">0</span>
@@ -149,6 +181,8 @@
         var n = confirm("Press OK to submit; cancel to continue typing");
         if (n != true) return;
 
+        var submitcode = codeGen();
+
         var utimespent = document.getElementsByTagName('time')[0].textContent;
         var uname =
         // alert(mysql_real_escape_string(words));
@@ -156,7 +190,8 @@
             {
                 textcontent: words,
                 timespent: utimespent,
-                username: globalname
+                username: globalname,
+                code: submitcode
             }
         );
         // document.getElementById("word_count").value = "";
@@ -212,37 +247,6 @@
 
     // genUsers(20);
 
-    </script>
-
-    <script type="text/javascript">
-
-        var $_GET = {};
-        if(document.location.toString().indexOf('?') !== -1) {
-            var query = document.location
-                           .toString()
-                           // get the query string
-                           .replace(/^.*?\?/, '')
-                           // and remove any existing hash string (thanks, @vrijdenker)
-                           .replace(/#.*$/, '')
-                           .split('&');
-
-            for(var i=0, l=query.length; i<l; i++) {
-               var aux = decodeURIComponent(query[i]).split('=');
-               $_GET[aux[0]] = aux[1];
-            }
-        }
-
-        //Cond 1 = 2947265
-        //Cond 2 = 2045385
-
-        var cond = 0;
-        if ($_GET['c'] == "29472303298573462465") {
-            cond = 1;
-        }
-        if ($_GET['c'] == "20453436234763468785") {
-            cond = 2;
-        }
-        // alert(cond);
     </script>
 
     <script src="timer.js"></script>
