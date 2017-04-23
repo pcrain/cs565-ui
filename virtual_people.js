@@ -274,6 +274,9 @@ class Simulator
             );
 
             this.nWords.push(Math.floor(chance.normal({mean: nMaxWords, dev: 1/5*nMaxWords})) );
+            this.theSims[i].progress = this.nWords[i]/nMaxWords;
+            this.theSims[i].activeTime =
+                Math.floor(chance.normal({mean: this.theSims[i].progress, dev: 0.2}) * avgCompletionTime * 60 / timeInterval);
         }
     }
 
