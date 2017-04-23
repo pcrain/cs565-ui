@@ -61,6 +61,14 @@
 
 <h1 align="center">Please visit this short survey: <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1"> https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1 </a></h1>
 
+<script src="js/jquery.js"></script>
+<script src="chance.min.js"></script>
+<script src="codegen.js"></script>
+<script type="text/javascript">
+  var code = codeGen();
+  $("#code-area").html("Please copy the following code to MTurk: "+code);
+</script>
+
 </body>
 
 </html>

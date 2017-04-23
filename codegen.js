@@ -3,11 +3,11 @@ var chanceCode = new Chance();
 function codeGen(){
     var code = '';
     var sum  = 0;
-    
+
     while (sum <= 100)
     {
         var temp = chanceCode.integer({min:1,max:9});
-        
+
         if ((sum + temp) <= 100){
             code += temp;
         } else{
@@ -15,7 +15,7 @@ function codeGen(){
         }
         sum += temp;
     }
-    
+
     return code;
 }
 
