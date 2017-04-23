@@ -10,7 +10,7 @@ if (cond == 1) {
 if (cond == 2) {
     var adjCompletionTime = 3; //adjusted for slow users
     var avgCompletionTime = 15; //minutes
-    var nSims             = 8;
+    var nSims             = 6;
 }
 
 // var namechance = new Chance("nameseed");
@@ -69,8 +69,8 @@ var group6a = {      //arrived later, average focus and lower persistence, but f
 };
 
 var group1b = {
-    latencyMean : 9/10,
-    focusMean   : 1/20,
+    latencyMean : 8/10,
+    focusMean   : 1/50,
     persistenceMean : 1/10,
     speedMean : 0.00
 }

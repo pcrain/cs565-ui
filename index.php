@@ -146,6 +146,9 @@
           return;
         }
 
+        var n = confirm("Press OK to submit; cancel to continue typing");
+        if (n != true) return;
+
         var utimespent = document.getElementsByTagName('time')[0].textContent;
         var uname =
         // alert(mysql_real_escape_string(words));
