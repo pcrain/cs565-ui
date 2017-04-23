@@ -86,17 +86,14 @@
             </ul>
         </div>
 
-
         <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 align="center">
-                        <!-- <i class="fa fa-circle" style="color: #2b542c"></i> -->
-                        <u>Write a Review of Your Favorite Book</u></h1>
+                        <b><p align="center"><u>Write a review of your favorite movie</u></p></b>
+                        <p align="center">Minimum 150 words. Please use our interface for the writing task (we will know if you don’t). Complete a short survey after the task.</p>
                         <!-- <h1 align="center"><i class="fa fa-circle" style="color: #2b542c"></i><u>Assignment 1</u></h1> -->
                         <p align="center">Time active: <time>00:00:00</time></p>
                         <p align="center"> Total Words: <span id="display_count">0</span>
@@ -141,6 +138,14 @@
 
     function submitText() {
         var words = document.getElementById("word_count").value;
+
+        if (parseInt(words.length) >= 150) {
+          // alert(words);
+        } else {
+          alert("Need at least 150 words");
+          return;
+        }
+
         var utimespent = document.getElementsByTagName('time')[0].textContent;
         // alert(mysql_real_escape_string(words));
         post("submission.php",

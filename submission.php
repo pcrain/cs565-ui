@@ -29,9 +29,9 @@
 </head>
 
 <body>
-<h1 align="center"> Congratulations! Your work has been submitted </h1>
+<h1 align="center"> Thank you! Your work has been submitted.</h1>
 
-<p>
+<h1 id="code-area" align="center"> Please copy the following code to MTurk: placeholder</h1>
 
 <?php
   #Set up database
@@ -54,12 +54,12 @@
   $maxid = $ret->fetchArray()[0]+1;
   // echo $maxid;
   $thedate = date('Y-m-d G:i:s');
-  echo $thedate;
+  // echo $thedate;
   $words = SQLite3::escapeString($_POST["textcontent"]);
   $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$words."','".$_POST['timespent']."','".$thedate."')");
 ?>
 
-</p>
+<h1 align="center">Please visit this short survey: <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1"> https://docs.google.com/forms/d/e/1FAIpQLSdJsDkUiHvQuD0X_Q-az-dbZIDoTkWp-BYSiNuH83JFKUpE0g/viewform?c=0&w=1 </a></h1>
 
 </body>
 
