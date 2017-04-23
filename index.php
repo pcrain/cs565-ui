@@ -59,7 +59,7 @@
 <body>
 
 
-    <div id="wrapper" >
+    <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -70,8 +70,6 @@
                 </li>
                 <li data-toggle="modal" data-target="#myModal">
                     <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #2b542c"></i> Jake (Active now) <i class="fa fa-question-circle-o"> </i></a>
-
-
                 </li>
                 <li data-toggle="modal" data-target="#myModal2">
                     <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #2b542c"></i> Kate (Active now)</a>
@@ -80,7 +78,7 @@
                     <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #761c19"></i> Rose (Not started)</a>
                 </li>
                 <li  data-toggle="modal" data-target="#myModal1">
-                    <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #8a6d3b;"></i> John (2 hours ago)<i class="fa fa-question-circle-o" data-toggle="modal" data-target="#myModal1"> </i></a>
+                    <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #8a6d3b;"></i> John (2 hours ago) <i class="fa fa-question-circle-o" data-toggle="modal" data-target="#myModal1"> </i></a>
                 </li>
                 <li data-toggle="modal" data-target="#myModal4">
                     <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #2b542c"></i> Andy (Active now)</a>
@@ -120,7 +118,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 align="center"><i class="fa fa-circle" style="color: #2b542c"></i><u>Assignment 1</u></h1>
+                        <h1 align="center">
+                        <!-- <i class="fa fa-circle" style="color: #2b542c"></i> -->
+                        <u>Write a Review of Your Favorite Book</u></h1>
+                        <!-- <h1 align="center"><i class="fa fa-circle" style="color: #2b542c"></i><u>Assignment 1</u></h1> -->
                         <p align="center">Time active: <time>00:00:00</time></p>
                         <p align="center"> Total Words: <span id="display_count">0</span>
                         <br><br>
@@ -369,12 +370,68 @@
   });
 
     function submitText() {
-        post("submission.php",{name: document.getElementById("word_count").value});
+        var words = document.getElementById("word_count").value;
+        var utimespent = document.getElementsByTagName('time')[0].textContent;
+        // alert(mysql_real_escape_string(words));
+        post("submission.php",
+            {
+                textcontent: words,
+                timespent: utimespent
+            }
+        );
         // document.getElementById("word_count").value = "";
         // window.location.href="submission.html"
     }
 
+    function genUsers(users) {
+        // alert(JSON.stringify(users)); return;
+
+        $(".sidebar-nav").html("");
+        // alert("yo");
+        // var users = [];
+        $(".modal:not(.in)").remove();
+        for (var i = 0; i < users.length; ++i) {
+            var user = users[i];
+            if (user["progress"] >= 100 || user["state"] == 0) continue;
+            // alert(JSON.stringify(user));
+
+            var status = "";
+            if (user["state"] == 0) status = "Not Started";
+            if (user["state"] == 1) status = "Inactive";
+            if (user["state"] == 2) status = "Typing Now";
+            if (user["state"] == 3) status = "Completed";
+
+            // user["status"] = "Active now";
+            // alert(JSON.stringify(user));
+            // users.push(user);
+            var ss = '<li data-toggle="modal" data-target="#myModal'+(i+1)+'">';
+            ss += '<a href="#" style="font-size: large";>'
+            ss += '<i class="fa fa-circle" style="color:' + user["color"] + '"></i> ';
+            ss += user["name"] + " (" + status +")</a></li>";
+            // alert(ss);
+            $(".sidebar-nav").append(ss);
+
+
+            var ss = "";
+            ss += '<div class="modal fade" id="myModal'+(i+1)+'" role="dialog" style="text-align: center;">';
+            ss += '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">';
+            ss += '<button type="button" class="close" data-dismiss="modal">&times;</button>'
+            ss += '<h4 class="modal-title" align="center">'+user["name"]+'</h4></div>';
+            ss += '<div class="modal-body">';
+            ss += '<p >Number of Words: '+user["nWords"]+'</p>';
+            // ss += '<p>Time Spent: 30 mins</p>'; //Hardcoded for now
+            ss += '<p>Progress: '+Math.min(100,Math.floor(user["progress"]))+'%</p>';
+            ss += '</div></div></div></div>';
+
+            $("#wrapper").append(ss);
+        }
+        return users;
+    }
+
+    // genUsers(20);
+
     </script>
+
     <script src="timer.js"></script>
     <script src="chance.min.js"></script>
     <script src="virtual_people.js"></script>

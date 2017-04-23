@@ -47,6 +47,7 @@
   $db->query("CREATE TABLE IF NOT EXISTS DATA565 (
     id integer PRIMARY KEY,
     input_text varchar,
+    input_spent varchar,
     input_time varchar
   )");
   $ret = $db->query("SELECT max(id) FROM DATA565");
@@ -54,7 +55,8 @@
   // echo $maxid;
   $thedate = date('Y-m-d G:i:s');
   echo $thedate;
-  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$_POST["name"]."','".$thedate."')");
+  $words = SQLite3::escapeString($_POST["textcontent"]);
+  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$words."','".$_POST['timespent']."','".$thedate."')");
 ?>
 
 </p>

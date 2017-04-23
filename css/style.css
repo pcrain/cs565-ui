@@ -5,3 +5,9 @@
      max-height: 400px;
      padding: 15px;
  }
+
+ .sidebar-nav .fa {
+  width: 100%;
+  display: inline;
+ }
+
