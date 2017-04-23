@@ -66,7 +66,9 @@
 
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <h3 align="center">Favourite Users </h3>
+                    <span class="fa fa-circle" style="color: #008800"><span class="legendText"> Typing   </span></span>
+                    <span class="fa fa-circle" style="color: #880000"><span class="legendText"> Inactive</span></span>
+                    <!-- <i class="fa fa-circle" style="color: #880000"></i><h3 align="center">Inactive</h3> -->
                 </li>
                 <li data-toggle="modal" data-target="#myModal">
                     <a href="#" style="font-size: large";> <i class="fa fa-circle" style="color: #2b542c"></i> Jake (Active now) <i class="fa fa-question-circle-o"> </i></a>
@@ -88,9 +90,9 @@
                 </li>
 
 
-                <hr style="background-color: white">
+                <!-- <hr style="background-color: white"> -->
 
-                <h3 align="center">Other Users </h3>
+                <!-- <h3 align="center">Other Users </h3> -->
                 <br>
 
 
@@ -386,7 +388,7 @@
     function genUsers(users) {
         // alert(JSON.stringify(users)); return;
 
-        $(".sidebar-nav").html("");
+        $(".sidebar-nav li:not(.sidebar-brand)").remove();
         // alert("yo");
         // var users = [];
         $(".modal:not(.in)").remove();

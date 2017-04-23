@@ -14,3 +14,10 @@
 .sidebarUsename {
   /*color: cyan;*/
 }
+
+.legendText {
+  color: #FFFFFF;
+  font-size: 12pt;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  white-space: pre-wrap;
+}
