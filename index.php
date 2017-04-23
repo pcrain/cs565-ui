@@ -423,7 +423,7 @@
             ss += '<h4 class="modal-title" align="center">'+user["name"]+'</h4></div>';
             ss += '<div class="modal-body">';
             ss += '<p >Number of Words: '+user["nWords"]+'</p>';
-            // ss += '<p>Time Spent: 30 mins</p>'; //Hardcoded for now
+             ss += '<p>Time Spent: '+user["active"]+' mins</p>'; //Hardcoded for now
             ss += '<p>Progress: '+Math.min(100,Math.floor(user["progress"]))+'%</p>';
             ss += '</div></div></div></div>';
 

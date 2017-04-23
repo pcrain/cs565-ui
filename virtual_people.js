@@ -128,9 +128,10 @@ class Sim{
         if (speed < -0.9 || speed > 0.9)
             throw('sim_speed is a float variable between -0.9 to 0.9');
 
-        this.name     = name;
-        this.state    = 0;
-        this.progress = 0;
+        this.name       = name;
+        this.state      = 0;
+        this.progress   = 0;
+        this.activeTime = 0;
 
         this.latency = latency;
         this.focus       = focus;
@@ -196,6 +197,7 @@ Sim.prototype.tick = function(){
     } else{
         if (this.state == 2){
             this.progress += this.progressStates[this.speedHMM.state];
+            this.activeTime++;
             this.speedHMM.tick();
         }
 
@@ -287,13 +289,14 @@ class Simulator
                 status   : status[sim.state],
                 color    : color[sim.state],
                 name     : sim.name,
+                active   : Math.floor(sim.activeTime *timeInterval /60)
             });
         }
 
         this.simState = output;
         genUsers(this.simState);
 
-        var disp = output.map(s => s.nWords);
+//        var disp = output.map(s => s.nWords);
         // console.log(disp);
     }
 }
