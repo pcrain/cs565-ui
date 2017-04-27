@@ -34,6 +34,7 @@
   if (! isset($_POST["textcontent"])) exit;
   if (! isset($_POST["username"])) exit;
   if (! isset($_POST["code"])) exit;
+  if (! isset($_POST["cond"])) exit;
   $words = SQLite3::escapeString($_POST["textcontent"]);
   $uname = SQLite3::escapeString($_POST["username"]);
   #Set up database
@@ -49,17 +50,19 @@
   $db->query("CREATE TABLE IF NOT EXISTS DATA565 (
     id integer PRIMARY KEY,
     input_name varchar,
-    input_text varchar,
     input_spent varchar,
     input_time varchar,
-    input_code varchar
+    input_code varchar,
+    input_condition varchar,
+    input_ip varchar,
+    input_text varchar
   )");
   $ret = $db->query("SELECT max(id) FROM DATA565");
   $maxid = $ret->fetchArray()[0]+1;
   // echo $maxid;
   $thedate = date('Y-m-d G:i:s');
   // echo $thedate;
-  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$uname."','".$words."','".$_POST['timespent']."','".$thedate."','".$_POST['code']."')");
+  $db->query("INSERT INTO DATA565 VALUES(".$maxid.",'".$uname."','".$_POST['timespent']."','".$thedate."','".$_POST['code']."','".$_POST['cond']."','".$_SERVER['REMOTE_ADDR']."','".$words."')");
 ?>
 
 <h1 align="center"> Thank you! Your work has been submitted.</h1>

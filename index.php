@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Write a Review</title>
+    <title>Transcribe an Article</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -124,8 +124,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <b><h1 align="center">Write a review of your favorite movie</h1></b>
-                        <p align="center">Minimum 150 words. Please use our interface for the writing task (we will know if you don’t), and complete a short survey afterwards. Paste the task code you receive after completing the writing assignment both to the survey and to the HIT on Mechanical Turk.</p>
+                        <b><h1 align="center">Transcribe select words from an article</h1></b>
+                        <p align="center"><b>Please transcribe the last word of each sentence (not paragraph) from the article on the left to the box on the right below.</b> Please use our interface for the writing task, and complete a short survey afterwards. Paste the task code you receive after completing the writing assignment both to the survey and to the HIT on Mechanical Turk.</p>
                         <!-- <h1 align="center"><i class="fa fa-circle" style="color: #2b542c"></i><u>Assignment 1</u></h1> -->
                         <p align="center">Time active: <time>00:00:00</time></p>
                         <p align="center"> Total Words: <span id="display_count">0</span>
@@ -133,8 +133,13 @@
                         <!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">See users</a> -->
                         <!-- <br><br> -->
 
-                       <textarea id="word_count" placeholder="Enter your answer here" style="width:100%; height:350px;"></textarea>
+                       <table id="inputtable"><tr class="tallrow"><td>
+                       <iframe src="article-trimmed.html"></iframe>
+                       </td><td>
+                       <textarea id="word_count" placeholder="Enter your answer here"></textarea>
+                       </td></tr><tr><td></td><td>
                        <a type="submit" class="btn btn-default" onclick="javascript:submitText();">Submit</a>
+                       </td></tr></table>
                     </div>
                 </div>
             </div>
@@ -171,16 +176,21 @@
     function submitText() {
         var words = document.getElementById("word_count").value;
 
-        if (parseInt(words.length) >= 150) {
+        if (parseInt(words.length) >= 30) {
           // alert(words);
         } else {
-          alert("Need at least 150 words");
+          alert("Need at least 30 words");
           return;
         }
 
         var n = confirm("Press OK to submit; cancel to continue typing");
         if (n != true) return;
 
+        var condtype = "unknown";
+        if (cond == 1)
+            condtype = "active";
+        else if (cond == 2)
+            condtype = "inactive";
         var submitcode = codeGen();
 
         var utimespent = document.getElementsByTagName('time')[0].textContent;
@@ -191,7 +201,8 @@
                 textcontent: words,
                 timespent: utimespent,
                 username: globalname,
-                code: submitcode
+                code: submitcode,
+                cond: condtype
             }
         );
         // document.getElementById("word_count").value = "";
