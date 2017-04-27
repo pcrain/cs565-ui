@@ -1,4 +1,4 @@
-var color  = ["#000000","#444444","#107896","#888888"];
+var color  = ["#000000","#444444","#107896","#00BB00"];
 // var color  = ["#000000","#C02F1D","#107896","#888888"];
 var status = ["not started","inactive","active","completed"];
 
@@ -72,7 +72,7 @@ var group1b = {
     latencyMean : 8/10,
     focusMean   : 1/50,
     persistenceMean : 1/10,
-    speedMean : 0.00
+    speedMean : -0.90
 }
 
 if (cond == 1) {

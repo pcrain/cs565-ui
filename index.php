@@ -218,7 +218,8 @@
         $(".modal:not(.in)").remove();
         for (var i = 0; i < users.length; ++i) {
             var user = users[i];
-            if (user["progress"] >= 100 || user["state"] == 0) continue;
+            // if (user["progress"] >= 100 || user["state"] == 0) continue;
+            if (user["state"] == 0) continue;
             // alert(JSON.stringify(user));
 
             var status = "";
@@ -227,15 +228,22 @@
             if (user["state"] == 2) status = "Typing Now";
             if (user["state"] == 3) status = "Completed";
 
+            var prog = Math.min(100,Math.floor(user["progress"]));
+
             // user["status"] = "Active now";
             // alert(JSON.stringify(user));
             // users.push(user);
-            var ss = '<li data-toggle="modal" data-target="#myModal'+(i+1)+'">';
+            // var ss = '<li class="sidebarListItem" data-toggle="modal" data-target="#myModal'+(i+1)+'">';
+            var ss = '<li class="sidebarListItem">';
             ss += '<a href="#" style="font-size: large";>'
             ss += '<i class="fa fa-circle" style="color:' + user["color"] + '"></i> ';
             ss += "<span class='sidebarUsename'>" + user["name"] + "</span>";
             // ss += " (" + status +")"
-            ss += "</a></li>";
+            ss += "</a>";
+            ss += "</li>";
+            ss += "<span class='onHover'>Progress: <meter value='"+prog/100+"'></meter> ("+user["active"]+"s.)</span>";
+
+
             // alert(ss);
             $(".sidebar-nav").append(ss);
 
@@ -245,11 +253,14 @@
             ss += '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">';
             ss += '<button type="button" class="close" data-dismiss="modal">&times;</button>'
             ss += '<h4 class="modal-title" align="center">'+user["name"]+'</h4></div>';
-            ss += '<div class="modal-body">';
-            ss += '<p >Number of Words Typed: '+user["nWords"]+'</p>';
+            // ss += '<div class="modal-body">';
+            // ss += '<p >Number of Words Typed: '+user["nWords"]+'</p>';
              ss += '<p>Time Spent Typing: ~'+user["active"]+' seconds</p>'; //Hardcoded for now
-            // ss += '<p>Progress: '+Math.min(100,Math.floor(user["progress"]))+'%</p>';
-            ss += '</div></div></div></div>';
+            ss += '<p>Progress: '+prog+'%</p>';
+            // ss += '</div>';
+            ss += '</div>';
+            ss += '</div>';
+            ss += '</div>';
 
             $("#wrapper").append(ss);
         }

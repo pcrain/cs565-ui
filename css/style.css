@@ -49,3 +49,23 @@
 .col-lg-12 a {
   text-align: center;
 }
+
+.onHover {
+  transition: none;
+  position: relative;
+  margin-left: 20pt;
+  color: darkgray;
+  display: block;
+  max-height: 0pt;
+  overflow: hidden;
+}
+
+li.sidebarListItem:hover + .onHover {
+  transition: max-height ease 0.5s;
+  max-height: 20pt;
+  /*display: inline;*/
+}
+
+#sidebar-wrapper {
+  overflow-x: visible;
+}
